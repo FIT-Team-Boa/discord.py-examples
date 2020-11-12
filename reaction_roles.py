@@ -19,14 +19,14 @@ async def on_ready():
 
 @bot.event
 async def on_raw_reaction_add(payload):
-    #Message may not be in a guild!
-    if payload.emoji.name in emoji_to_role.keys():
-        guild = bot.get_guild(payload.guild_id)
-        role = guild.get_role(emoji_to_role[payload.emoji.name])
-        if payload.message_id == role_add_message_id:
-            await payload.member.add_roles(role)
-        elif payload.message_id == role_remove_message_id:
-            await payload.member.remove_roles(role)
+    if payload.guild_id:
+        if payload.emoji.name in emoji_to_role.keys():
+            guild = bot.get_guild(payload.guild_id)
+            role = guild.get_role(emoji_to_role[payload.emoji.name])
+            if payload.message_id == role_add_message_id:
+                await payload.member.add_roles(role)
+            elif payload.message_id == role_remove_message_id:
+                await payload.member.remove_roles(role)
 
 token = ""
 with open('../token.txt') as f:

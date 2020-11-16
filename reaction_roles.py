@@ -1,6 +1,9 @@
+"""Uses two messages to add and remove roles through reactions."""
+
 import discord
 from discord.ext import commands
 
+# This bot requires the members and reactions intensions.
 intents = discord.Intents.default()
 intents.members = True
 intents.reactions = True
@@ -19,6 +22,7 @@ async def on_ready():
 
 @bot.event
 async def on_raw_reaction_add(payload):
+    """Gives or removes a role based on a reaction emoji."""
     if payload.guild_id:
         if payload.emoji.name in emoji_to_role.keys():
             guild = bot.get_guild(payload.guild_id)

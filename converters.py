@@ -29,8 +29,8 @@ class RoleMembersConverter(commands.RoleConverter):
         """Converts a role to a list of members with the role."""
         role = await super().convert(ctx, arguement)
         return role.members
-@bot.command()
-async def list(ctx, members : RoleMembersConverter):
+@bot.command(name='list')
+async def list_members(ctx, members : RoleMembersConverter):
     """Lists all of the members with a specific role."""
     member_list = ", ".join(m.name for m in members)
     await ctx.send(member_list)

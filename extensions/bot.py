@@ -1,4 +1,5 @@
-import discord
+"""Utilizes extensions to showcase switching between groups of commands."""
+
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("!"))
@@ -9,6 +10,7 @@ async def on_ready():
 
 @bot.command()
 async def angry(ctx):
+    """Allows user to switch to the angry extension."""
     if "sad" in bot.extensions:
         bot.unload_extension("sad")
 
@@ -19,6 +21,7 @@ async def angry(ctx):
 
 @bot.command()
 async def sad(ctx):
+    """Allows user to switch to the sad extension."""
     if "angry" in bot.extensions:
         bot.unload_extension("angry")
 
